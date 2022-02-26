@@ -1,3 +1,3 @@
 # NVExtensions
 
-A description of this package.
+Common extensions.
