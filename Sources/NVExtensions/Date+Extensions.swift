@@ -78,5 +78,4 @@ extension Date {
         let format = String("EEEE, MMM d, yyyy. HH:mm")
         return DateFormatter.asString(self, format: format, calendar: calendar)
     }
-
 }
