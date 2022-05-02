@@ -1,6 +1,11 @@
 # NVExtensions
 
-Common iOS extensions. Heavily inspired from: https://github.com/onmyway133/Omnia.
+Common extensions for day-to-day iOS development. Heavily inspired from: https://github.com/onmyway133/Omnia.
+
+This package include:
++ Foundation extensions
++ UIKit extensions
++ SwiftUI extensions
 
 ## Requirement 
 
