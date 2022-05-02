@@ -8,8 +8,8 @@
 
 import Foundation
 
-public extension Array where Element == String {
-    var commonText: String {
+extension Array where Element == String {
+    public var commonText: String {
         var result = [String]()
 
         for loop in enumerated() {
@@ -28,6 +28,6 @@ public extension Array where Element == String {
     }
 }
 
-public extension Array where Element: Hashable {
-    var asSet: Set<Element> { Set(self) }
+extension Array where Element: Hashable {
+    public var asSet: Set<Element> { Set(self) }
 }

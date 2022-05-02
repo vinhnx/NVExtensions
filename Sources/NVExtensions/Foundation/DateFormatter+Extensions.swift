@@ -9,8 +9,8 @@
 import Foundation
 import SwiftDate
 
-public extension DateFormatter {
-	static func lunarDateString(
+extension DateFormatter {
+	public static func lunarDateString(
 		forDate date: Date = Date(),
 		dateFormat: String = "dd/MM"
 	) -> String {
@@ -21,7 +21,7 @@ public extension DateFormatter {
 		return dateFormater.string(from: date)
 	}
 
-    static func asString(
+    public static func asString(
         _ date: Date,
         format: String,
         calendar: Calendar = .autoupdatingCurrent

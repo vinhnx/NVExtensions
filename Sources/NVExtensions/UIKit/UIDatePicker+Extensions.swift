@@ -8,8 +8,8 @@
 
 import UIKit
 
-public extension UIDatePicker {
-    func configurePreferredDatePickerStyle() {
+extension UIDatePicker {
+    public func configurePreferredDatePickerStyle() {
         if #available(iOS 13.4, *) {
             preferredDatePickerStyle = .automatic
         }

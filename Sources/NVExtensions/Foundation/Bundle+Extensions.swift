@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public extension Bundle {
+extension Bundle {
 
     // reference: https://stackoverflow.com/a/51241158
 	public var icon: UIImage? {

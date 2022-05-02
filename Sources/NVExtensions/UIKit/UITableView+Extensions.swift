@@ -9,7 +9,7 @@ import UIKit
 
 // reference: https://github.com/onmyway133/Omnia/blob/master/Sources/iOS/UITableView.swift
 
-public extension UITableView {
+extension UITableView {
     /// Register a cell
     ///
     /// - Parameter cell: The type of the cell

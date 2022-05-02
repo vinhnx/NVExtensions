@@ -7,8 +7,8 @@
 
 import UIKit
 
-public extension UIImage {
-    static func from(color: UIColor, size: CGSize) -> UIImage {
+extension UIImage {
+    public static func from(color: UIColor, size: CGSize) -> UIImage {
         let renderer = UIGraphicsImageRenderer(size: size)
         return renderer.image { context in
             color.setFill()
@@ -17,7 +17,7 @@ public extension UIImage {
     }
 
     // reference: https://www.advancedswift.com/resize-uiimage-no-stretching-swift/
-    func scalePreservingAspectRatio(targetSize: CGSize) -> UIImage {
+    public func scalePreservingAspectRatio(targetSize: CGSize) -> UIImage {
         // Determine the scale factor that preserves aspect ratio
         let widthRatio = targetSize.width / size.width
         let heightRatio = targetSize.height / size.height

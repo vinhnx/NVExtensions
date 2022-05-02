@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-public extension String {
-    func trim(text: String) -> String {
+extension String {
+    public func trim(text: String) -> String {
         replacingOccurrences(of: text, with: "", options: .literal)
     }
 
@@ -24,58 +24,58 @@ public extension String {
     }
 
     /// Return a localized string using NSLocalizedString
-    var localized: String {
+    public var localized: String {
         return NSLocalizedString(self, comment: "")
     }
 
-    func toData() -> Data {
+    public var toData: Data {
         return Data(self.utf8)
     }
 
-    var trimmed: String {
+    public var trimmed: String {
         return trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    func hasPattern(regex: String) -> Bool {
+    public func hasPattern(regex: String) -> Bool {
         return range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
     }
 
-    func containsIgnoringCase(_ find: String) -> Bool {
+    public func containsIgnoringCase(_ find: String) -> Bool {
         return self.range(of: find, options: .caseInsensitive) != nil
     }
 
-    func trimmingInsideSmartQuotes() -> String {
+    public func trimmingInsideSmartQuotes() -> String {
         return self.replacingOccurrences(of: #"“\S*”"#, with: "", options: .regularExpression).trimmed
     }
 
-    func trimmingInsideParenthesis() -> String {
+    public func trimmingInsideParenthesis() -> String {
         return self.replacingOccurrences(of: #"\(\S*\)"#, with: "", options: .regularExpression).trimmed
     }
 
-    func trimmingInsideAsterisks() -> String {
+    public func trimmingInsideAsterisks() -> String {
         return self.replacingOccurrences(of: #"\*\S*\*"#, with: "", options: .regularExpression).trimmed
     }
 
-    func trimmingInsideQuotes() -> String {
+    public func trimmingInsideQuotes() -> String {
         return self.replacingOccurrences(of: #"\"\S*\""#, with: "", options: .regularExpression).trimmed
     }
 
     /// Check whether self contains any element in the array
-    func contains(anyIn array: [String]) -> Bool {
+    public func contains(anyIn array: [String]) -> Bool {
         return array.contains(where: self.contains)
     }
 
-    func parseInt() -> Int? {
+    public func parseInt() -> Int? {
         // ref: https://stackoverflow.com/questions/30342744/swift-how-to-get-integer-from-string-and-convert-it-into-integer
         Int(components(separatedBy: CharacterSet.decimalDigits.inverted).joined())
     }
 
-    var asImage: UIImage? { UIImage(named: self) }
+    public var asImage: UIImage? { UIImage(named: self) }
 }
 
 // https://github.com/vincent-pradeilles/swift-tips#shorter-syntax-to-deal-with-optional-strings
-public extension Optional where Wrapped == String {
-    var orEmpty: String {
+extension Optional where Wrapped == String {
+    public var orEmpty: String {
         switch self {
         case let .some(value):
             return value

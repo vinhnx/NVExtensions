@@ -10,18 +10,18 @@ import UIKit
 
 // reference: https://github.com/onmyway133/Omnia/blob/master/Sources/iOS/UIView.swift
 
-public extension UIView {
+extension UIView {
 
     // MARK: - Autolayout
 
-    func pinCenter(view: UIView) -> [NSLayoutConstraint] {
+    public func pinCenter(view: UIView) -> [NSLayoutConstraint] {
         return [
             centerXAnchor.constraint(equalTo: view.centerXAnchor),
             centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ]
     }
 
-    func pinEdges(view: UIView, inset: UIEdgeInsets = UIEdgeInsets.zero) -> [NSLayoutConstraint] {
+    public func pinEdges(view: UIView, inset: UIEdgeInsets = UIEdgeInsets.zero) -> [NSLayoutConstraint] {
         return [
             leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: inset.left),
             trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: inset.right),
@@ -30,25 +30,25 @@ public extension UIView {
         ]
     }
 
-    func pin(size: CGSize) -> [NSLayoutConstraint] {
+    public func pin(size: CGSize) -> [NSLayoutConstraint] {
         return [
             widthAnchor.constraint(equalToConstant: size.width),
             heightAnchor.constraint(equalToConstant: size.height)
         ]
     }
 
-    func addSubViewAndFit(_ subView: UIView) {
+    public func addSubViewAndFit(_ subView: UIView) {
         subView.prepareForAutolayout()
         prepareForAutolayout()
         addSubview(subView)
         subView.fitLayoutOnSuperView(self)
     }
 
-    func prepareForAutolayout() {
+    public func prepareForAutolayout() {
         translatesAutoresizingMaskIntoConstraints = false
     }
 
-    func fitLayoutOnSuperView(_ superView: UIView, insets: UIEdgeInsets = .zero) {
+    public func fitLayoutOnSuperView(_ superView: UIView, insets: UIEdgeInsets = .zero) {
         prepareForAutolayout()
 
         let constraints: [NSLayoutConstraint]
@@ -75,7 +75,7 @@ public extension UIView {
     /// Instantiate view instance from nib
     ///
     /// - Returns: a view instance
-    class func fromNib<T: UIView>() -> T? {
+    class public func fromNib<T: UIView>() -> T? {
         let nib = String(describing: T.self)
         guard let result = Bundle.main.loadNibNamed(nib, owner: nil, options: nil)?.first as? T else {
             return nil
@@ -85,31 +85,31 @@ public extension UIView {
     }
 
     /// Style modal with corner radius
-    func applyCornerRadius() {
+    public func applyCornerRadius() {
         applyRound(4.0)
     }
 
     /// Make circle from view
-    func applyCircle() {
+    public func applyCircle() {
         applyRound(min(frame.size.width, frame.size.height) / 2)
     }
 
     /// Apply round view with radius
     ///
     /// - Parameter radius: radius value
-    func applyRound(_ radius: CGFloat) {
+    public func applyRound(_ radius: CGFloat) {
         applyRound(radius, borderColor: .clear, borderWidth: 1, addShadow: false)
     }
 
     /// Apply round view with radius gray color
     ///
     /// - Parameter radius: radius value
-    func applyRoundGray(_ radius: CGFloat) {
+    public func applyRoundGray(_ radius: CGFloat) {
         applyRound(radius, borderColor: .lightGray, borderWidth: 1, addShadow: false)
     }
 
     /// Apply round view shadow with offset shadow
-    func applyRoundWithOffsetShadow(backgroundColor: UIColor = .white) {
+    public func applyRoundWithOffsetShadow(backgroundColor: UIColor = .white) {
         self.backgroundColor = backgroundColor
         layer.shadowColor = UIColor.lightGray.cgColor
         layer.shadowOffset = CGSize(width: 0, height: 5.0)
@@ -130,7 +130,7 @@ public extension UIView {
     ///   - borderColor: border color
     ///   - borderWidth: border width
     ///   - addShadow: should add shadow
-    func applyRound(_ radius: CGFloat, borderColor: UIColor, borderWidth: CGFloat, addShadow: Bool, shadowOffset: CGSize) {
+    public func applyRound(_ radius: CGFloat, borderColor: UIColor, borderWidth: CGFloat, addShadow: Bool, shadowOffset: CGSize) {
         if addShadow {
             layer.shadowColor = UIColor.lightGray.cgColor
             layer.shadowOffset = shadowOffset
@@ -151,7 +151,7 @@ public extension UIView {
     ///   - borderColor: border color
     ///   - borderWidth: border width
     ///   - addShadow: should add shadow
-    func applyRound(_ radius: CGFloat, borderColor: UIColor, borderWidth: CGFloat, addShadow: Bool) {
+    public func applyRound(_ radius: CGFloat, borderColor: UIColor, borderWidth: CGFloat, addShadow: Bool) {
         applyRound(radius, borderColor: borderColor, borderWidth: borderWidth, addShadow: addShadow, shadowOffset: .zero)
     }
 
@@ -160,7 +160,7 @@ public extension UIView {
     /// Apply cutout view mask on view
     ///
     /// - Parameter cutOutView: a view to apply
-    func applyCutoutMaskWith(cutOutView: UIView) {
+    public func applyCutoutMaskWith(cutOutView: UIView) {
         let outerPath = UIBezierPath(rect: frame)
 
         let circlePath = UIBezierPath(ovalIn: cutOutView.frame)
@@ -178,26 +178,26 @@ public extension UIView {
     /// Apply border
     ///
     /// - Parameter color: border color
-    func applyBorder(color: UIColor) {
+    public func applyBorder(color: UIColor) {
         layer.borderColor = color.cgColor
         layer.borderWidth = 1.0
         layer.masksToBounds = true
     }
 
     /// Remove any border
-    func removeBorder() {
+    public func removeBorder() {
         layer.borderColor = UIColor.clear.cgColor
         layer.borderWidth = 0
         layer.masksToBounds = true
     }
 
     /// Style with drop shadow
-    func applyDropshadow() {
+    public func applyDropshadow() {
         applyRound(3, borderColor: UIColor.white, borderWidth: 1, addShadow: true)
     }
 
     /// Remove drop shadow
-    func removeDropshadow() {
+    public func removeDropshadow() {
         layer.borderColor = UIColor.clear.cgColor
         layer.borderWidth = 0
         layer.shadowColor = UIColor.clear.cgColor
@@ -208,14 +208,14 @@ public extension UIView {
     /// Take a snapshot of a view
     ///
     /// - Returns: The image from the snapshot
-    func toImage() -> UIImage? {
+    public func toImage() -> UIImage? {
         let renderer = UIGraphicsImageRenderer(size: bounds.size)
         return renderer.image { _ in
             self.drawHierarchy(in: bounds, afterScreenUpdates: true)
         }
     }
 
-    func findRecursively<T: UIView>(type: T.Type, match: (T) -> Bool) -> T? {
+    public func findRecursively<T: UIView>(type: T.Type, match: (T) -> Bool) -> T? {
         for view in subviews {
             if let subview = view as? T, match(subview) {
                 return subview

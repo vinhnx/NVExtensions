@@ -8,13 +8,9 @@
 
 import UIKit
 
-var window: UIWindow? {
-    let scenes = UIApplication.shared.connectedScenes
-    let windowScene = scenes.first as? UIWindowScene
-    return windowScene?.windows.first
-}
-
 extension UIViewController {
+
+
     // MARK: - Container
 
     /// Add child view controller from container view
@@ -22,7 +18,7 @@ extension UIViewController {
     /// - Parameters:
     ///   - childViewController: child view controller
     ///   - containerView: container view
-    func addChildViewController(_ childViewController: UIViewController, containerView: UIView) {
+    public func addChildViewController(_ childViewController: UIViewController, containerView: UIView) {
         addChild(childViewController)
         containerView.addSubview(childViewController.view)
 
@@ -39,7 +35,7 @@ extension UIViewController {
     }
 
     /// Remove self from parent view controller
-    func removeFromParentViewController() {
+    public func removeFromParentViewController() {
         willMove(toParent: nil)
         view.removeFromSuperview()
         removeFromParent()
@@ -52,7 +48,7 @@ extension UIViewController {
     ///   - viewControllerB: the view controller to exchange to
     ///   - containerView: container view to place viewControllerB
     ///   - rootViewController: the root view controller
-    func exchangeViewControllerA(_ viewControllerA: UIViewController?, with viewControllerB: UIViewController?, containerView: UIView?, on rootViewController: UIViewController) {
+    public func exchangeViewControllerA(_ viewControllerA: UIViewController?, with viewControllerB: UIViewController?, containerView: UIView?, on rootViewController: UIViewController) {
         guard let viewControllerA = viewControllerA else { return }
         guard let viewControllerB = viewControllerB else { return }
         guard let containerView = containerView else { return }
@@ -60,7 +56,7 @@ extension UIViewController {
         rootViewController.addChildViewController(viewControllerB, containerView: containerView)
     }
 
-    static func topViewController(_ baseViewController: UIViewController?) -> UIViewController? {
+    static public func topViewController(_ baseViewController: UIViewController?) -> UIViewController? {
         if baseViewController is UINavigationController {
             return topViewController((baseViewController as? UINavigationController)?.visibleViewController)
         }
@@ -81,24 +77,24 @@ extension UIViewController {
     }
 
     static var topViewController: UIViewController? {
-        UIViewController.topViewController(window?.rootViewController)
+        UIViewController.topViewController(UIApplication.window?.rootViewController)
     }
 
     /// Safe present view controller
     ///
     /// - Parameter completion: completion handler
-    func safeDismiss(_ completion: @escaping (() -> Void)) {
+    public func safeDismiss(_ completion: @escaping (() -> Void)) {
         guard isBeingDismissed else { return }
         dismiss(animated: true, completion: completion)
     }
 
     // MARK: - Others
 
-    func dismissKeyboard() {
+    public func dismissKeyboard() {
         view.endEditing(true)
     }
 
-    @objc func dimissModal() {
+    @objc public func dimissModal() {
         view.endEditing(true)
         dismiss(animated: true)
     }

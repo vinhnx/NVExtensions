@@ -10,28 +10,28 @@ import Foundation
 
 public typealias TypedUserInfoKey<T> = (key: String, type: T.Type)
 
-public extension Dictionary where Key == String, Value == Any {
-    subscript<T>(_ typedKey: TypedUserInfoKey<T>) -> T? {
+extension Dictionary where Key == String, Value == Any {
+    public subscript<T>(_ typedKey: TypedUserInfoKey<T>) -> T? {
         self[typedKey.key] as? T
     }
 }
 
 // MARK: - Extensions
 
-public extension Dictionary where Key == String {
+extension Dictionary where Key == String {
     // MARK: - Helper
     
     /// Find value for key in-sensitive search, eg: "FooBar","fooBar","FOOBAR","FoOBaR"...
     ///
     /// - Parameter key: key
     /// - Returns: value
-    func valueForKeyInsensitive<T>(key: Key) -> T? {
+    public func valueForKeyInsensitive<T>(key: Key) -> T? {
         let foundKey = keys.first { $0.compare(key, options: .caseInsensitive) == .orderedSame } ?? key // IMPORTANT: fallback to original key if search failed
         return self[foundKey] as? T
     }
     
     /// Merge two dictionaries, reference: https://stackoverflow.com/a/26728685/1477298
-    mutating func merge(dict: [Key: Value]) {
+    mutating public func merge(dict: [Key: Value]) {
         for (k, v) in dict {
             updateValue(v, forKey: k)
         }
@@ -41,7 +41,7 @@ public extension Dictionary where Key == String {
     ///
     /// - Parameter key: key
     /// - Returns: value
-    func arrayFor<T>(key: Key) -> [T] {
+    public func arrayFor<T>(key: Key) -> [T] {
         valueForKeyInsensitive(key: key) ?? [T]()
     }
     
@@ -49,7 +49,7 @@ public extension Dictionary where Key == String {
     ///
     /// - Parameter key: key
     /// - Returns: dictionary
-    func dictionaryFor(key: Key) -> [String: Any] {
+    public func dictionaryFor(key: Key) -> [String: Any] {
         valueForKeyInsensitive(key: key) ?? [String: Any]()
     }
     
@@ -57,7 +57,7 @@ public extension Dictionary where Key == String {
     ///
     /// - Parameter key: the key
     /// - Returns: value subscript
-    func valueFor<T>(key: Key) -> T? {
+    public func valueFor<T>(key: Key) -> T? {
         valueForKeyInsensitive(key: key)
     }
     
@@ -65,7 +65,7 @@ public extension Dictionary where Key == String {
     ///
     /// - Parameter key: the key
     /// - Returns: value subscript, cast as String
-    func stringFor(key: Key) -> String {
+    public func stringFor(key: Key) -> String {
         valueForKeyInsensitive(key: key).orEmpty
     }
     
@@ -73,7 +73,7 @@ public extension Dictionary where Key == String {
     ///
     /// - Parameter key: the key
     /// - Returns: value subscript, cast as Int
-    func intFor(key: Key) -> Int {
+    public func intFor(key: Key) -> Int {
         valueForKeyInsensitive(key: key) ?? 0
     }
     
@@ -81,7 +81,7 @@ public extension Dictionary where Key == String {
     ///
     /// - Parameter key: key
     /// - Returns: value
-    func doubleFor(key: Key) -> Double {
+    public func doubleFor(key: Key) -> Double {
         valueForKeyInsensitive(key: key) ?? 0.0
     }
     
@@ -89,12 +89,12 @@ public extension Dictionary where Key == String {
     ///
     /// - Parameter key: key
     /// - Returns: value
-    func floatFor(key: Key) -> Float {
+    public func floatFor(key: Key) -> Float {
         valueForKeyInsensitive(key: key) ?? 0.0
     }
     
     /// Pretty dictionary
-    func prettyPrint() {
+    public func prettyPrint() {
         do {
             let _serialized = try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
             print(String(data: _serialized, encoding: .utf8) ?? description)
@@ -106,7 +106,7 @@ public extension Dictionary where Key == String {
     /// Remove empty string from dictionary, useful for analytics
     ///
     /// - Returns: A filtered dictionary
-    func filterEmptyStringValue() -> [Key: Value] {
+    public func filterEmptyStringValue() -> [Key: Value] {
         filter { (_, value) -> Bool in
             if value is String {
                 return ((value as? String) ?? "").isEmpty == false
@@ -116,7 +116,7 @@ public extension Dictionary where Key == String {
         }
     }
     
-    var toData: Data? {
+    public var toData: Data? {
         guard JSONSerialization.isValidJSONObject(self) else {
             print("invalid json: \(self)")
             return nil
@@ -130,7 +130,7 @@ public extension Dictionary where Key == String {
         }
     }
     
-    var toString: String {
+    public var toString: String {
         description
     }
 }

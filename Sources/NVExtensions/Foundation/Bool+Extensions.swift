@@ -8,8 +8,8 @@
 
 import Foundation
 
-public extension Bool {
-    var asString: String {
+extension Bool {
+    public var asString: String {
         self ? NSLocalizedString("On", comment: "") : NSLocalizedString("Off", comment: "")
     }
 }

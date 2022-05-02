@@ -7,8 +7,8 @@
 
 import UIKit
 
-public extension UIFont {
-    static func registerCustom(fileName: String, fileExtension: String, bundle: Bundle = .main) {
+extension UIFont {
+    public static func registerCustom(fileName: String, fileExtension: String, bundle: Bundle = .main) {
         guard
             let url = bundle.url(forResource: fileName, withExtension: fileExtension),
             let data = try? Data(contentsOf: url),

@@ -9,12 +9,12 @@ import UIKit
 
 // reference: https://github.com/onmyway133/Omnia/blob/master/Sources/iOS/UIColor.swift
 
-public extension UIColor {
+extension UIColor {
 
     /// Init color from hex string
     ///
     /// - Parameter hex: A hex string, with or without #
-    convenience init(hex: String) {
+    public convenience init(hex: String) {
         let hex = hex.replacingOccurrences(of: "#", with: "")
 
         // Need 6 characters
@@ -31,7 +31,7 @@ public extension UIColor {
         )
     }
 
-    convenience init(hex: Int, alpha: Double = 1) {
+    public convenience init(hex: Int, alpha: Double = 1) {
         let components = (
             R: Double((hex >> 16) & 0xff) / 255,
             G: Double((hex >> 08) & 0xff) / 255,

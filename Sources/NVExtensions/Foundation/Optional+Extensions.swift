@@ -7,7 +7,7 @@
 
 import Foundation
 
-public extension Optional where Wrapped == String {
+extension Optional where Wrapped == String {
     public var isNilOrEmpty: Bool {
         if let unwrapped = self {
             return unwrapped.isEmpty
