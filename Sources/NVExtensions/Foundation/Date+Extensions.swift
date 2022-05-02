@@ -1,6 +1,6 @@
 //
 //  Date+Extensions.swift
-//  Clendar
+//  NVExtensions
 //
 //  Created by Vinh Nguyen on 31/3/19.
 //  Copyright © 2019 Vinh Nguyen. All rights reserved.
@@ -9,7 +9,7 @@
 import Foundation
 import SwiftDate
 
-extension Date {
+public extension Date {
     var startDate: Date {
         dateAtStartOf(.day)
     }
@@ -77,5 +77,33 @@ extension Date {
     func toFullEventDate(calendar: Calendar = .autoupdatingCurrent) -> String {
         let format = String("EEEE, MMM d, yyyy. HH:mm")
         return DateFormatter.asString(self, format: format, calendar: calendar)
+    }
+
+    func second(calendar: Calendar = .current) -> Int {
+        return calendar.component(.second, from: self)
+    }
+
+    func minute(calendar: Calendar = .current) -> Int {
+        return calendar.component(.minute, from: self)
+    }
+
+    func hour(calendar: Calendar = .current) -> Int {
+        return calendar.component(.hour, from: self)
+    }
+
+    func day(calendar: Calendar = .current) -> Int{
+        return calendar.component(.day, from: self)
+    }
+
+    func month(calendar: Calendar = .current) -> Int {
+        return calendar.component(.month, from: self)
+    }
+
+    func year(calendar: Calendar = .current) -> Int {
+        return calendar.component(.year, from: self)
+    }
+
+    func weekday(calendar: Calendar = .current) -> Int {
+        return calendar.component(.weekday, from: self)
     }
 }

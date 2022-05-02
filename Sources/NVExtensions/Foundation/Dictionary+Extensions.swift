@@ -1,6 +1,6 @@
 //
 //  Dictionary+Extensions.swift
-//  Clendar
+//  NVExtensions
 //
 //  Created by Vinh Nguyen on 25/3/19.
 //  Copyright © 2019 Vinh Nguyen. All rights reserved.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-typealias TypedUserInfoKey<T> = (key: String, type: T.Type)
+public typealias TypedUserInfoKey<T> = (key: String, type: T.Type)
 
-extension Dictionary where Key == String, Value == Any {
+public extension Dictionary where Key == String, Value == Any {
     subscript<T>(_ typedKey: TypedUserInfoKey<T>) -> T? {
         self[typedKey.key] as? T
     }
@@ -18,7 +18,7 @@ extension Dictionary where Key == String, Value == Any {
 
 // MARK: - Extensions
 
-extension Dictionary where Key == String {
+public extension Dictionary where Key == String {
     // MARK: - Helper
     
     /// Find value for key in-sensitive search, eg: "FooBar","fooBar","FOOBAR","FoOBaR"...

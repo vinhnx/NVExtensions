@@ -1,6 +1,6 @@
 # NVExtensions
 
-Common iOS extensions.
+Common iOS extensions. Heavily inspired from: https://github.com/onmyway133/Omnia.
 
 ## Requirement 
 

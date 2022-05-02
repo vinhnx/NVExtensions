@@ -1,16 +1,41 @@
 //
 //  UIView+Extensions.swift
-//  Clendar
+//  NVExtensions
 //
 //  Created by Vinh Nguyen on 26/3/19.
 //  Copyright © 2019 Vinh Nguyen. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-extension UIView {
+// reference: https://github.com/onmyway133/Omnia/blob/master/Sources/iOS/UIView.swift
+
+public extension UIView {
+
     // MARK: - Autolayout
+
+    func pinCenter(view: UIView) -> [NSLayoutConstraint] {
+        return [
+            centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ]
+    }
+
+    func pinEdges(view: UIView, inset: UIEdgeInsets = UIEdgeInsets.zero) -> [NSLayoutConstraint] {
+        return [
+            leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: inset.left),
+            trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: inset.right),
+            topAnchor.constraint(equalTo: view.topAnchor, constant: inset.top),
+            bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: inset.bottom)
+        ]
+    }
+
+    func pin(size: CGSize) -> [NSLayoutConstraint] {
+        return [
+            widthAnchor.constraint(equalToConstant: size.width),
+            heightAnchor.constraint(equalToConstant: size.height)
+        ]
+    }
 
     func addSubViewAndFit(_ subView: UIView) {
         subView.prepareForAutolayout()
@@ -178,5 +203,27 @@ extension UIView {
         layer.shadowColor = UIColor.clear.cgColor
         layer.shadowOpacity = 0
         layer.shadowRadius = 0
+    }
+
+    /// Take a snapshot of a view
+    ///
+    /// - Returns: The image from the snapshot
+    func toImage() -> UIImage? {
+        let renderer = UIGraphicsImageRenderer(size: bounds.size)
+        return renderer.image { _ in
+            self.drawHierarchy(in: bounds, afterScreenUpdates: true)
+        }
+    }
+
+    func findRecursively<T: UIView>(type: T.Type, match: (T) -> Bool) -> T? {
+        for view in subviews {
+            if let subview = view as? T, match(subview) {
+                return subview
+            } else {
+                return view.findRecursively(type: type, match: match)
+            }
+        }
+
+        return nil
     }
 }

@@ -1,6 +1,6 @@
 //
 //  DateFormatter+Extensions.swift
-//  Clendar
+//  NVExtensions
 //
 //  Created by Vinh Nguyen on 10/20/20.
 //  Copyright © 2020 Vinh Nguyen. All rights reserved.
@@ -9,7 +9,7 @@
 import Foundation
 import SwiftDate
 
-extension DateFormatter {
+public extension DateFormatter {
 	static func lunarDateString(
 		forDate date: Date = Date(),
 		dateFormat: String = "dd/MM"

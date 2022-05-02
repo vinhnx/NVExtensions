@@ -1,6 +1,6 @@
 //
 //  Color+Extensions.swift
-//  Clendar
+//  NVExtensions
 //
 //  Created by Vinh Nguyen on 30/01/2021.
 //  Copyright © 2021 Vinh Nguyen. All rights reserved.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-extension Color {
+public extension Color {
     init(hex: UInt, alpha: Double = 1) {
         self.init(
             .sRGB,

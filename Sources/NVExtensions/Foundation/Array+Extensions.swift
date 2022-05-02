@@ -1,6 +1,6 @@
 //
 //  Array+Extensions.swift
-//  Clendar
+//  NVExtensions
 //
 //  Created by Vinh Nguyen on 24/3/19.
 //  Copyright © 2019 Vinh Nguyen. All rights reserved.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Array where Element == String {
+public extension Array where Element == String {
     var commonText: String {
         var result = [String]()
 
@@ -28,6 +28,6 @@ extension Array where Element == String {
     }
 }
 
-extension Array where Element: Hashable {
+public extension Array where Element: Hashable {
     var asSet: Set<Element> { Set(self) }
 }
